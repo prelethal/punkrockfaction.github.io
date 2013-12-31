@@ -1,0 +1,42 @@
+* {
+  margin:0px;
+  padding:0px;
+  height:100%;
+}
+
+#nav {
+  position:fixed;
+  display: none; 
+}
+
+#section-one { 
+  background-image: url(http://bit.ly/1ggxGRz);
+}
+
+#section-two { 
+  background-image: url(http://bit.ly/1h9cGPm);
+}
+
+#section-three { 
+  background-image: url(http://bit.ly/19WeS8S);
+}
+
+#section-four { 
+  background-image: url(http://bit.ly/JFhNIe);
+}
+
+.cover {
+  background: no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+}
+
+#play {
+  width:60px;
+  height:60px;
+  background-color:red;
+  margin: 0px auto;
+}
