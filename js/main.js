@@ -1,6 +1,45 @@
 $(document).ready(function() {
     
     /**
+     * Audio setup
+     */
+    var soundReady = false;
+    var audioPlaying = false;
+    var soundInstance;
+    var audioSrc = './audio/punk-rock-faction.ogg';
+    createjs.Sound.alternateExtensions = ['mp3']
+    createjs.Sound.addEventListener('fileload', function(){
+        soundReady = true; 
+        // TODO:: Add some visual loading cue 
+    });
+    createjs.Sound.registerSound(audioSrc); 
+
+    /**
+     * Play the track if ready
+     */
+    function playAudio(){
+        // Play if audio ready
+        if( ! soundReady || audioPlaying ){
+            return false;
+        }
+        else{
+            audioPlaying = true;
+            soundInstance = createjs.Sound.play(audioSrc); 
+            soundInstance.addEventListener('complete', audioComplete);
+            return true;
+        }
+    }
+    
+    /**
+     * Do stuff when the audio track's finished
+     */
+    function audioComplete(){
+        console.log('Audio finished');
+        soundInstance.stop();
+        audioPlaying = false;
+    }
+
+    /**
      * Set an array of objects to store all the information about the order of the divs to scroll to,
      * this way, you could scroll back up to one if you wanted
      * 
@@ -24,8 +63,10 @@ $(document).ready(function() {
      * Bind the auto scroll to the play link click event
      */
     $('#play-btn').on('click', function(e){
-        // Scroll to the first element after a short delay
-        scrollWithDelay(scrollElement, true);
+        if( playAudio() ){
+            // Scroll to the first element after a short delay
+            scrollWithDelay(scrollElement, true);
+        }
         // Prevent default stops the browser from fulfilling the normal action, in this case going to the # anchor link
         e.preventDefault();
     });
